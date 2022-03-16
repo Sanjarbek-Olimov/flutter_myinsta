@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "941505079609",
+    "project_id": "flutter-instagram-home-task",
+    "storage_bucket": "flutter-instagram-home-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941505079609:android:af53b393c53c2e36cfa0e8",
+        "android_client_info": {
+          "package_name": "com.example.flutter_myinsta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941505079609-kdf46cgamd7vkjhg3mmk7pqdt1tcdai1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDA9vUkugQF-r0EIaQpDjh6ERbKJp49mnE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941505079609-kdf46cgamd7vkjhg3mmk7pqdt1tcdai1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
