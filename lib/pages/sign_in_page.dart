@@ -4,7 +4,6 @@ import 'package:flutter_myinsta/pages/sign_up_page.dart';
 import 'package:flutter_myinsta/services/auth_service.dart';
 import 'package:flutter_myinsta/services/hive_service.dart';
 import 'package:flutter_myinsta/services/utils_service.dart';
-
 import 'home_page.dart';
 
 class SignInPage extends StatefulWidget {

@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_myinsta/model/user_model.dart';
 import 'package:flutter_myinsta/pages/sign_in_page.dart';
 import 'package:flutter_myinsta/services/auth_service.dart';
+import 'package:flutter_myinsta/services/data_service.dart';
+import 'package:flutter_myinsta/services/hive_service.dart';
 import 'package:flutter_myinsta/services/utils_service.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -52,13 +55,17 @@ class _SignUpPageState extends State<SignUpPage> {
     setState(() {
       isLoading = true;
     });
+    UserModel userModel =
+        UserModel(fullName: name, email: email, password: password);
     await AuthService.signUpUser(context, name, email, password)
-        .then((value) => _getFirebaseUser(value));
+        .then((value) => _getFirebaseUser(userModel, value));
   }
 
-  void _getFirebaseUser(User? user) {
+  void _getFirebaseUser(UserModel userModel, User? user) {
     if (user != null) {
-      Navigator.pushReplacementNamed(context, SignInPage.id);
+      HiveDB.storeUid(user.uid);
+      DataService.storeUser(userModel).then(
+          (value) => Navigator.pushReplacementNamed(context, SignInPage.id));
     }
     setState(() {
       isLoading = false;

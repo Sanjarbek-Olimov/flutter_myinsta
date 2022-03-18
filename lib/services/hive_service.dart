@@ -8,7 +8,7 @@ class HiveDB{
     box.put("uid", uid);
   }
 
-  static String? loadUid(){
+  static String loadUid(){
     return box.get("uid");
   }
 
