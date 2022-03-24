@@ -81,11 +81,18 @@ class _MyFeedPageState extends State<MyFeedPage> {
                 ))
           ],
         ),
-        body: ListView.builder(
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              return _itemOfPost(items[index]);
-            }));
+        body: Stack(
+          children: [
+            ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return _itemOfPost(items[index]);
+                }),
+            isLoading
+                ? const Center(child: CircularProgressIndicator.adaptive())
+                : const SizedBox.shrink()
+          ],
+        ));
   }
 
   Widget _itemOfPost(Post post) {

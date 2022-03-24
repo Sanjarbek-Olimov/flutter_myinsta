@@ -53,7 +53,7 @@ class DataService {
 
     var querySnapshot = await _fireStore
         .collection(folder_user)
-        .orderBy("email")
+        .orderBy("fullName")
         .startAt([keyword]).endAt([keyword +'\uf8ff']).get();
 
     for (var result in querySnapshot.docs) {
