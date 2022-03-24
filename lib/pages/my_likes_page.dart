@@ -12,21 +12,11 @@ class MyLikesPage extends StatefulWidget {
 
 class _MyLikesPageState extends State<MyLikesPage> {
   List<Post> items = [];
-  String post_img1 =
-      "https://firebasestorage.googleapis.com/v0/b/koreanguideway.appspot.com/o/develop%2Fpost.png?alt=media&token=f0b1ba56-4bf4-4df2-9f43-6b8665cdc964";
-  String post_img2 =
-      "https://firebasestorage.googleapis.com/v0/b/koreanguideway.appspot.com/o/develop%2Fpost2.png?alt=media&token=ac0c131a-4e9e-40c0-a75a-88e586b28b72";
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    items.add(Post(
-        postImage: post_img1,
-        caption: "Discover more great images on our sponsor's site"));
-    items.add(Post(
-        postImage: post_img2,
-        caption: "Discover more great images on our sponsor's site"));
   }
 
   @override
@@ -92,7 +82,7 @@ class _MyLikesPageState extends State<MyLikesPage> {
 
         // #image
         CachedNetworkImage(
-          imageUrl: post.postImage,
+          imageUrl: post.img_post,
           placeholder: (context, url) =>
               const CircularProgressIndicator.adaptive(),
           errorWidget: (context, url, error) => const Icon(Icons.error),

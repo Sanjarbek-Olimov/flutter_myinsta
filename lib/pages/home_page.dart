@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           });
         },
         currentIndex: _currentTap,
-        activeColor: const Color.fromRGBO(193, 53, 132, 1),
+        activeColor: const Color.fromRGBO(245, 96, 64, 1),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home)),
           BottomNavigationBarItem(icon: Icon(Icons.search)),
