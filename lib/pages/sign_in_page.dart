@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_myinsta/model/user_model.dart';
 import 'package:flutter_myinsta/pages/sign_up_page.dart';
 import 'package:flutter_myinsta/services/auth_service.dart';
+import 'package:flutter_myinsta/services/data_service.dart';
 import 'package:flutter_myinsta/services/hive_service.dart';
 import 'package:flutter_myinsta/services/utils_service.dart';
+
 import 'home_page.dart';
 
 class SignInPage extends StatefulWidget {
@@ -43,12 +46,26 @@ class _SignInPageState extends State<SignInPage> {
   void _getFirebaseUser(User? user) {
     if (user != null) {
       HiveDB.storeUid(user.uid);
+      _apiUpdateUser();
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     }
     setState(() {
       isLoading = false;
     });
+  }
+
+  void _apiUpdateUser() async {
+    UserModel userModel = await DataService.loadUser(null);
+    userModel.device_token = HiveDB.loadFCM();
+    await DataService.updateUser(userModel);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Utils.initNotification();
   }
 
   @override
