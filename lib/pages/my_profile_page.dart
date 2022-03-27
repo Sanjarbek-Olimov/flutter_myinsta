@@ -10,7 +10,6 @@ import 'package:flutter_myinsta/services/file_service.dart';
 import 'package:flutter_myinsta/services/utils_service.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 class MyProfilePage extends StatefulWidget {
   const MyProfilePage({Key? key}) : super(key: key);
 
@@ -34,7 +33,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
     setState(() {
       isLoading = true;
     });
-    DataService.loadUser().then((value) => _showUserInfo(value));
+    DataService.loadUser(null).then((value) => _showUserInfo(value));
   }
 
   void _showUserInfo(UserModel userModel) {
@@ -58,7 +57,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
   }
 
   void _apiUpdateUser(String downLoadUrl) async {
-    UserModel userModel = await DataService.loadUser();
+    UserModel userModel = await DataService.loadUser(null);
     userModel.img_url = downLoadUrl;
     await DataService.updateUser(userModel);
     _apiLoadUser();
@@ -68,7 +67,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
     setState(() {
       isLoading = true;
     });
-    DataService.loadPosts().then((value) => {_resLoadPosts(value)});
+    DataService.loadPosts(null).then((value) => {_resLoadPosts(value)});
   }
 
   void _resLoadPosts(List<Post> posts) {
@@ -180,12 +179,12 @@ class _MyProfilePageState extends State<MyProfilePage> {
                             borderRadius: BorderRadius.circular(70),
                             border: Border.all(
                                 width: 1.5,
-                                color: const Color.fromRGBO(193, 53, 132, 1))),
+                                color: const Color.fromRGBO(245, 96, 64, 1))),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(35),
                             child: img_url == ""
                                 ? Image.asset(
-                                    "assets/images/img.png",
+                                    "assets/images/background.png",
                                     width: 70,
                                     height: 70,
                                   )
@@ -207,7 +206,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                               onTap: bottomSheet,
                               child: const Icon(
                                 Icons.add_circle,
-                                color: Colors.purple,
+                                color: Colors.deepOrange,
                               ),
                             )
                           ],

@@ -1,5 +1,8 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_myinsta/services/utils_service.dart';
+
 import 'my_feed_page.dart';
 import 'my_likes_page.dart';
 import 'my_profile_page.dart';
@@ -19,6 +22,22 @@ class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController();
   int _currentTap = 0;
 
+  _initNotification() {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      Utils.showLocalNotification(message, context);
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      Utils.showLocalNotification(message, context);
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _initNotification();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,10 +50,10 @@ class _HomePageState extends State<HomePage> {
         },
         children: [
           MyFeedPage(pageController: _pageController),
-          MySearchPage(),
+          const MySearchPage(),
           MyUploadPage(pageController: _pageController),
-          MyLikesPage(),
-          MyProfilePage()
+          const MyLikesPage(),
+          const MyProfilePage()
         ],
       ),
       bottomNavigationBar: CupertinoTabBar(
@@ -42,7 +61,8 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             _currentTap = index;
             _pageController.animateToPage(index,
-                duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeIn);
           });
         },
         currentIndex: _currentTap,

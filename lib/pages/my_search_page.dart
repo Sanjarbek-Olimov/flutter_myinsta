@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_myinsta/model/user_model.dart';
 import 'package:flutter_myinsta/services/data_service.dart';
+import 'package:flutter_myinsta/services/http_service.dart';
+
+import 'other_profile_page.dart';
 
 class MySearchPage extends StatefulWidget {
   const MySearchPage({Key? key}) : super(key: key);
@@ -37,6 +40,11 @@ class _MySearchPageState extends State<MySearchPage> {
     setState(() {
       someone.followed = true;
       isLoading = false;
+    });
+    await Network.POST(
+            Network.API_PUSH, Network.bodyCreate(someone.device_token))
+        .then((value) {
+      print(value);
     });
     DataService.storePostsToMyFeed(someone);
   }
@@ -122,18 +130,24 @@ class _MySearchPageState extends State<MySearchPage> {
 
   Widget _itemOfUser(UserModel user) {
     return ListTile(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => OtherProfilePage(uid: user.uid)));
+      },
       contentPadding: EdgeInsets.zero,
       leading: Container(
         padding: const EdgeInsets.all(2),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(70),
             border: Border.all(
-                width: 1.5, color: const Color.fromRGBO(193, 53, 132, 1))),
+                width: 1.5, color: const Color.fromRGBO(245, 96, 64, 1))),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(22.5),
           child: user.img_url.isEmpty
               ? Image.asset(
-                  "assets/images/img.png",
+                  "assets/images/background.png",
                   width: 45,
                   height: 45,
                   fit: BoxFit.cover,
