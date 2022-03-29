@@ -81,6 +81,12 @@ class _MyFeedPageState extends State<MyFeedPage> {
   }
 
   @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if (mounted) super.setState(fn);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -126,12 +132,13 @@ class _MyFeedPageState extends State<MyFeedPage> {
         Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: ListTile(
-              onTap: (){
+              onTap: () {
                 if (!post.mine) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => OtherProfilePage(uid: post.uid!)));
+                          builder: (context) =>
+                              OtherProfilePage(uid: post.uid!)));
                 }
               },
               dense: true,
@@ -261,5 +268,4 @@ class _MyFeedPageState extends State<MyFeedPage> {
       isLoading = false;
     });
   }
-
 }

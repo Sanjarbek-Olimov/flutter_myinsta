@@ -63,6 +63,12 @@ class _MyUploadPageState extends State<MyUploadPage> {
     widget.pageController.jumpToPage(0);
   }
 
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    if (mounted) super.setState(fn);
+  }
+
   void bottomSheet() {
     showModalBottomSheet(
         context: context,
